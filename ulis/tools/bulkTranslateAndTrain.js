@@ -18,7 +18,7 @@ var ulisClient = new ulis.getClient({
     luisURL: config.get('LUIS_ENDPOINT')
 });
 
-lineReader.eachLine(filepath, function(line, last, cb) {
+lineReader.eachLine(filepath,(line, last, cb) => {
     
 	ulisClient.query(line, (err, ulisResponse) => {
 		if (err) {

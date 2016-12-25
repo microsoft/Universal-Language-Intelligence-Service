@@ -8,9 +8,9 @@ var langs = require('langs');
 function getClient(opts) {
 
 	var lang = opts.lang;
-	if (!lang) throw new Error('please provide a model language such as he');
+	if (!lang) throw new Error('Please provide a model language such as he');
 
-	if (!opts.bingTranslate_clientId || !opts.bingTranslate_secret) throw new Error('please provide bing translate clientId and secret');
+	if (!opts.bingTranslate_clientId || !opts.bingTranslate_secret) throw new Error('Please provide bing translate clientId and secret');
 
 	var translateClient = new MsTranslator({
 		client_id: opts.bingTranslate_clientId,
@@ -18,18 +18,18 @@ function getClient(opts) {
 	}, true);
 
 	var luisURL = opts.luisURL;
-	if (!luisURL) throw new Error('please provide a luis model optimized for the provided language');
+	if (!luisURL) throw new Error('Please provide a LUIS model optimized for the provided language');
 
 
 	function query(text, cb) {
 
+		if (!cb) return new Error('Please provide a callback to process the returned response');
+		if (!text) return cb(new Error('Please provide a text'));
 
-		if (!text) return cb(new Error('please provide a text'));
-
-		//confirm language: requires conversion between iso-639-3  and iso-639-1
-		lang3 = langs.where("1", lang)['3'];
+		//confirm language: requires conversion between iso-639-3 (lang3)  and iso-639-1
+		var lang3 = langs.where("1", lang)['3'];
 		var detectedLang = franc.all(text,{'whitelist' : ['eng',lang3], 'minLength': 3})[0][0];
-		console.log(detectedLang +' detected');
+		console.log(`${detectedLang} detected`);
 		if (detectedLang != lang3 ){
 			if ( detectedLang != 'eng'){
 				return cb(new Error('Sorry we don\'t support that language at the moment.'));
@@ -56,14 +56,13 @@ function getClient(opts) {
 
 		console.log(`Translating: ${text}`);
 
-		translateClient.translate(params, function(err, translation) { 
+		translateClient.translate(params, (err, translation) => { 
 			if (err) {
-				console.error(`error translating: ${err.message}`);
+				console.error(`Error translating: ${err.message}`);
 				return cb(err);
 			}
-
 			//write textToTranslate and translation to csv 
-			console.log(`Translating completed: ${text}: ${translation}`);
+			console.log(`Translating completed: ${text}:${translation}`);
 			return cb(null, translation);		
 		});
 		
@@ -73,13 +72,12 @@ function getClient(opts) {
 		console.log(`Sending to Luis: ${text}`);
 
 		luisScorer.scoreIntent(luisURL,text)
-		.then(function(luisResponse){
-			//console.log("LUIS Intent: " + intent.intent);
+		.then((luisResponse) => {
 			console.log(`Sending to Luis completed: ${text}`);
 			return cb(null, luisResponse);		
 		})
 		.catch(err => {
-			console.error(`error sending to LUIS: ${err.message}`);
+			console.error(`Error sending to LUIS: ${err.message}`);
 			return cb(err)
 		});
 	}

@@ -6,15 +6,15 @@ var Promise = require('promise');
 function scoreIntent(modelUrl, text, threshold) {
 
   threshold = threshold || 0;
-  return new Promise(function (resolve, reject) {
-    request(modelUrl + encodeURIComponent(text))
-      .then(function (result) {
-        var json = JSON.parse(result);
+  return new Promise((resolve, reject) => {
+    request(modelUrl + encodeURIComponent(text),{ json: true})
+      .then((result)=> {
+        var json = result;
 
-        if (!json || !json.intents || !json.intents.length) return resolve(null);
+        if (!json || !json.intents || !json.intents.length) return resolve();
 
         // In case when minumum score is required, enforce minimum score
-        if (json.intents[0].score < threshold) return resolve(null);
+        if (json.intents[0].score < threshold) return resolve();
 
         var intent = json.intents[0];
         intent.entities = json.entities;

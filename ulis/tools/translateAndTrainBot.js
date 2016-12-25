@@ -17,7 +17,7 @@ var ulisClient = new ulis.getClient({
 
 // Setup Restify Server
 var server = restify.createServer();
-server.listen(process.env.port || process.env.PORT || 3978, function () {
+server.listen(process.env.port || process.env.PORT || 3978, () => {
    console.log('%s listening to %s', server.name, server.url); 
 });
 
@@ -34,17 +34,17 @@ server.post('/api/messages', connector.listen());
 //=========================================================
 
 bot.dialog('/', [
-    function (session) {
+    (session) => {
         builder.Prompts.text(session, 'שלום איך אני יכול לעזור?');
     },
     //translate
-    function (session, results) {
-        ulisClient.query(results.response, function(err, ulisRes) {
+    (session, results) => {
+        ulisClient.query(results.response, (err, ulisRes) => {
             if (err) {
                 session.send(err.message);
                 return session.endDialog();        
             }
-            session.send("Translated As: "+ ulisRes.translatedText+ "\n\nLUIS Intent: " + ulisRes.intent + " \n\nLUIS Entities \n\n" + JSON.stringify(ulisRes.entities));
+            session.send(`Translated As: " ${ulisRes.translatedText} "\n\nLUIS Intent: " ${ulisRes.intent} " \n\nLUIS Entities \n\n"  ${JSON.stringify(ulisRes.entities)}`);
             session.endDialog();        
         });
     }

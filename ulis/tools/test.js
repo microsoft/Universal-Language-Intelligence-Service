@@ -9,10 +9,7 @@ var ulisClient = new ulis.getClient({
     luisURL: config.get('LUIS_ENDPOINT')
 });
 
- ulisClient.query('אפשר לקבוע תור למחר', function(err, ulisRes) {
-    if (err) {
-        Console.log(err.message);
-        return;        
-    }
-    Console.log("Translated As: "+ ulisRes.translatedText+ "\n\nLUIS Intent: " + ulisRes.intent + " \n\nLUIS Entities \n\n" + JSON.stringify(ulisRes.entities));
+ ulisClient.query('אפשר לקבוע תור למחר', (err, ulisRes) => {
+    if (err) return console.log(err.message);        
+    console.log(`Translated As: " ${ulisRes.translatedText} "\n\nLUIS Intent: " ${ulisRes.intent} " \n\nLUIS Entities \n\n"  ${JSON.stringify(ulisRes.entities)}`);
 });
