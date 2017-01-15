@@ -34,6 +34,7 @@ var ulisClient = new ulis.getClient({
     luisURL: 'LUIS_ENDPOINT'
 });
 
+//Make a query
  ulisClient.query('אפשר לקבוע תור למחר', (err, ulisRes) => {
     if (err) return console.log(err.message);       
     console.log(`Translated As: " ${ulisRes.translatedText} "\n\nLUIS Intent: " ${ulisRes.intent} " \n\nLUIS Entities \n\n"  ${JSON.stringify(ulisRes.entities)}`);
