@@ -9,14 +9,21 @@ function getClient(opts) {
 
 	var lang = opts.lang;
 	if (!lang) throw new Error('Please provide a model language such as he');
+	
+	var translateClient;
 
-	if (!opts.bingTranslate_clientId || !opts.bingTranslate_secret) throw new Error('Please provide bing translate clientId and secret');
-
-	var translateClient = new MsTranslator({
+    if (opts.bingTranslate_api_key){
+		translateClient = new MsTranslator({
+		api_key: opts.bingTranslate_api_key // use this for the new token API. 
+		}, true);
+	}
+	else if (!opts.bingTranslate_clientId || !opts.bingTranslate_secret) throw new Error('Please provide bing translate clientId and secret or api_key')
+	else {
+		translateClient = new MsTranslator({
 		client_id: opts.bingTranslate_clientId,
 		client_secret: opts.bingTranslate_secret
-	}, true);
-
+		}, true);
+	}
 	var luisURL = opts.luisURL;
 	if (!luisURL) throw new Error('Please provide a LUIS model optimized for the provided language');
 

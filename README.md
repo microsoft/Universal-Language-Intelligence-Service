@@ -18,11 +18,18 @@ A wrapper for the Microsoft LUIS cognitive that provides universal language supp
 ```js
 var ulis = require('ulis');
 
-//setup ulisClient
+//Setup ulisClient using client id and secret
 var ulisClient = new ulis.getClient({
     lang:'he',
     bingTranslate_clientId: 'TRANSLATE_CLIENT_ID',
     bingTranslate_secret: 'TRANSLATE_CLIENT_SECRET',
+    luisURL: 'LUIS_ENDPOINT'
+});
+
+//Or setup ulisClient using translate api_key from azure portal
+var ulisClient = new ulis.getClient({
+    lang:'he',
+    bingTranslate_api_key:'TRANSLATE_API_KEY',
     luisURL: 'LUIS_ENDPOINT'
 });
 
