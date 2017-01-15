@@ -1,9 +1,6 @@
 # Universal Language Intelligence Service
 A wrapper for the Microsoft LUIS cognitive that provides universal language support (after training) using the bing translate api 
 
-# Universal Language Intelligence Service
-A wrapper for the Microsoft LUIS cognitive that provides universal language support (after training) using the bing translate api 
-
 ## Pre-Requisites
 - LUIS Account 
 - Bing Translate Key
