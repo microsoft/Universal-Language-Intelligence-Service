@@ -1,5 +1,6 @@
 {
-  "TRANSLATE_CLIENT_ID":"",
-  "TRANSLATE_CLIENT_SECRET":"",
-  "LUIS_ENDPOINT":""
+  "TRANSLATE_CLIENT_ID":"HebrewBot",
+  "TRANSLATE_CLIENT_SECRET":"WNWSX9uWuY+BLUNdhZsrYHgZQ+UsawuhkNCeO1ZO5Nc=",
+  "TRANSLATE_CLIENT_API_KEY":"",
+  "LUIS_ENDPOINT":"https://api.projectoxford.ai/luis/v1/application?id=eee512ef-0e31-45ac-bd61-c5b97c71ae38&subscription-key=c80cd9f24783494ea76a5ab9378f340f&q="
 }

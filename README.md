@@ -9,6 +9,10 @@ A wrapper for the Microsoft LUIS cognitive that provides universal language supp
 - Bing Translate Key
 - Add keys to the configuration file
 
+## Installation
+
+    $ npm install ulis
+
 ## To Train Language Model (See Provided Hebrew Example)
 
 1. Upload natural language samples to LUIS using either the testTrainBot or the Batch insertion tool
