@@ -18,6 +18,7 @@
     "intent",
     "recognition"
   ],
+  "readme": "../README.md",
   "author": "Ari Bornstein",
   "license": "MIT",
   "bugs": {
