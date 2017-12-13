@@ -58,7 +58,8 @@ function getClient(opts) {
 		var params = {
 			text: text,
 			from: lang,
-			to: 'en'
+			to: 'en',
+			contentType: opts.contentType ? opts.contentType : 'text/plain',
 		};
 
 		console.log(`Translating: ${text}`);
@@ -68,9 +69,14 @@ function getClient(opts) {
 				console.error(`Error translating: ${err.message}`);
 				return cb(err);
 			}
+
+			if (opts.replaceInTranslation) {
+				translation = opts.replaceInTranslation(translation);
+			}
+			
 			//write textToTranslate and translation to csv 
 			console.log(`Translating completed: ${text}:${translation}`);
-			return cb(null, translation);		
+			return cb(null, translation);
 		});
 		
 	}

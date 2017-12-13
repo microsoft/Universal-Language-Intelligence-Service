@@ -41,3 +41,24 @@ var ulisClient = new ulis.getClient({
 });
 
 ```
+
+Optionally, you can specify the format of the text being translated. The supported formats are `text/plain` (default) and `text/html`.
+It is also possible to execute a function on the translated text before it is sent to LUIS. This is especially helpful if you want to exclude content from translation, see http://docs.microsofttranslator.com/text-translate.html#excluding-content-from-translation.
+
+Example:
+
+```js
+var ulisClient = new ulis.getClient({
+    lang:'he',
+    bingTranslate_api_key:'TRANSLATE_API_KEY',
+    luisURL: 'LUIS_ENDPOINT',
+
+    // set the format
+    contentType: 'text/html',
+
+    // pass a function that is applied to the translated text and removes the HTML
+    // from text enclosed with <div class="notranslate">text<\/div>
+    replaceInTranslation: text => text.replace(/<div class="notranslate">(.*?)<\/div>/g, ' $1')
+});
+
+```
