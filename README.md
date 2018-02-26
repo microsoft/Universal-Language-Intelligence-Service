@@ -1,6 +1,8 @@
 # Universal Language Intelligence Service
 A wrapper for the Microsoft LUIS cognitive that provides universal language support (after training) using the bing translate api 
 
+The .NET port can be found here: [ULIS.NET](https://github.com/peterbozso/ULIS.NET)
+
 ## Pre-Requisites
 - LUIS Account 
 - Bing Translate Key
